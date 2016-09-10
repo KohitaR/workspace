@@ -18,7 +18,7 @@
 using namespace std;
 
 int main(){
-    ifstream ifs("./data/test2");
+    ifstream ifs("/home/ryosuke-k/workspace/data/test-perceptron.txt");
     if (!ifs) {
         cout << "file read error" << endl;
         exit(1);
@@ -42,7 +42,7 @@ int main(){
     Perceptron model(sentences);
     model.Train();
 
-    ifstream test("./data/titles-en-test.labeled");
+    ifstream test("/home/ryosuke-k/workspace/data/test-perceptron.txt");
 
     if (!test) {
         cout << "file read error" << endl;
