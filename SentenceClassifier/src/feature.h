@@ -9,22 +9,31 @@
 #define FEATURE_H_
 
 #include <vector>
+#include <unordered_map>
+#include "obs2id.h"
 
-class Feature {
+class HashVI {  // ハッシュ関数オブジェクト
 public:
-    std::vector<std::vector< int>> CreateFeature(
+    size_t operator()(const std::vector<int> &x) const {
+        const int C = 997;      // 素数
+        size_t t = 0;
+        for (size_t i = 0; i != x.size(); ++i) {
+            t = t * C + x[i];
+        }
+        return t;
+    }
+};
+
+class Feature : public Obs2Id<std::vector<int>, HashVI>{
+public:
+    std::unordered_map<int, std::vector<int>> CreateFeature(
             std::vector<std::vector< int>> sentences);
-    std::vector<std::vector< int>> getFeature();
-    int pushFeature(std::vector< int>);
 
     std::vector<std::vector< int>> getSentVec();
-
     std::vector<std::vector<int>> getSentVec(std::vector<std::vector<int>> sentences);
-    int getIndex(std::vector<int>);
 
 
 private:
-    std::vector<std::vector< int>> mFeature;
     std::vector<std::vector< int>> mTrainSentVec;
     std::vector<std::vector< int>> mTestSentVec;
     int mFeatureN;

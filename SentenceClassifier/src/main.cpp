@@ -18,12 +18,14 @@
 using namespace std;
 
 int main() {
+    /// Loading data
     DataLoader data;
-    vector<vector<int>> sentences = data.load_train("/home/ryosuke-k/workspace/data/test-perceptron.txt");
+    vector<vector<int>> sentences = data.load_train("/home/ryosuke-k/workspace/data/titles-en-train.labeled");
     vector<int> gold_labels = data.getLabels("train");
 
+    /// Create features
     Feature feats_creator;
-    vector<vector<int>> phi = feats_creator.CreateFeature(sentences);
+    unordered_map<int, vector<int>> phi = feats_creator.CreateFeature(sentences);
     vector<vector<int>> sentence_vecs = feats_creator.getSentVec();
 
     Perceptron classifier;
@@ -35,7 +37,7 @@ int main() {
     cout << "LOADING TEST DATA SET" << endl;
     cout << endl;
 
-    vector<vector<int>> test_sentences = data.load_test("/home/ryosuke-k/workspace/data/test-perceptron.txt");
+    vector<vector<int>> test_sentences = data.load_test("/home/ryosuke-k/workspace/data/titles-en-train.labeled");
     vector<int> test_gold_labels = data.getLabels("test");
     vector<vector<int>> test_sentence_vecs = feats_creator.getSentVec(
             test_sentences);

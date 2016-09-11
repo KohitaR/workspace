@@ -11,7 +11,7 @@
 #include <string>
 #include <unordered_map>
 
-template <typename T>
+template <typename Key, typename Hash>
 class Obs2Id{
 public:
 
@@ -20,7 +20,7 @@ public:
     };
 
     //Template
-    inline int setObs(T obs){
+    inline int setObs(Key obs){
         auto itr = mObs2Id.find(obs);
         if (itr == mObs2Id.end()) {
             int id = mObs2Id.size();
@@ -32,7 +32,7 @@ public:
         }
     };
 
-    inline int getId(T obs) const{
+    inline int getId(Key obs) const{
         auto itr = mObs2Id.find(obs);
         if (itr == mObs2Id.end()) {
             return -1;
@@ -41,7 +41,7 @@ public:
         }
     };
 
-    inline T getObs(int id) {
+    inline int getObs(int id) {
         auto itr = mId2Obs.find(id);
         if (itr == mId2Obs.end()) {
             return mId2Obs[-1];
@@ -50,9 +50,12 @@ public:
         }
     };
 
+    inline std::unordered_map<int, Key> getMap(){
+        return mId2Obs;
+    };
 
 private:
-    std::unordered_map<T, int> mObs2Id;
-    std::unordered_map<int, T> mId2Obs;
+    std::unordered_map<Key, int, Hash> mObs2Id;
+    std::unordered_map<int, Key> mId2Obs;
 };
 #endif /* OBS2ID_H_ */

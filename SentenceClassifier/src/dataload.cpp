@@ -36,8 +36,8 @@ vector< vector<int> > DataLoader::load_train(string filename){
     vector<int> words_id;
     vector<int> label;
 
-    mWordIdMap.setObs("<s>");
-    mWordIdMap.setObs("</s>");
+    id = setObs("<s>");
+    id = setObs("</s>");
 
     while (getline(ifs, str)){
         char separator = '\t';
@@ -45,7 +45,7 @@ vector< vector<int> > DataLoader::load_train(string filename){
         words = split(v[1], ' ');
 
         for (auto word:words){
-            id = mWordIdMap.setObs(word);
+            id = setObs(word);
             words_id.push_back(id);
         }
 
@@ -89,16 +89,16 @@ std::vector<std::vector<int>> DataLoader::load_test(std::string filename){
         v = split(str, separator);
         words = split(v[1], ' ');
 
-        words_id.push_back(mWordIdMap.getId("<s>"));
+        words_id.push_back(getId("<s>"));
 
         for (auto word:words){
-            id = mWordIdMap.getId(word);
+            id = getId(word);
             words_id.push_back(id);
         }
 
         if (words_id.size() > 5){
             mTestLabel.push_back(stoi(v[0]));
-            words_id.push_back(mWordIdMap.getId("</s>"));
+            words_id.push_back(getId("</s>"));
             mTestSentences.push_back(words_id);
             words_id.clear();
         }

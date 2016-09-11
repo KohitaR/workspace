@@ -15,12 +15,11 @@
 
 #include "obs2id.h"
 
-class DataLoader {
+class DataLoader : public Obs2Id<std::string, std::hash<std::string>>{
 public:
     std::vector< std::vector<int> > load_train(std::string filename);
     std::vector<int> getLabels(std::string type);
     std::vector<std::vector<int>> load_test(std::string filename);
-    Obs2Id<std::string> getWordIdMap();
 
 
 private:
@@ -28,10 +27,6 @@ private:
     std::vector<std::vector<int>> mTestSentences;
     std::vector<int> mGoldLabel;
     std::vector<int> mTestLabel;
-
-    Obs2Id<std::string> mWordIdMap;
-
-
 };
 
 
