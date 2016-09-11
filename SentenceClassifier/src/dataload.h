@@ -20,7 +20,7 @@ public:
     std::vector< std::vector<int> > load_train(std::string filename);
     std::vector<int> getLabels(std::string type);
     std::vector<std::vector<int>> load_test(std::string filename);
-    Obs2Id getWordIdMap();
+    Obs2Id<std::string> getWordIdMap();
 
 
 private:
@@ -29,7 +29,7 @@ private:
     std::vector<int> mGoldLabel;
     std::vector<int> mTestLabel;
 
-    Obs2Id mWordIdMap;
+    Obs2Id<std::string> mWordIdMap;
 
 
 };
