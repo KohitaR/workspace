@@ -24,6 +24,8 @@ public:
     const std::size_t getVocabSize() const;
     const std::size_t getPosSize() const;
 
+    bool checkProj(std::vector<Conllu> sentence);
+
 
 private:
     Obs2Id<std::string, std::hash<std::string>> FormId_;

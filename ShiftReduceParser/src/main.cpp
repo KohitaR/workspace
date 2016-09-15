@@ -17,14 +17,14 @@ using namespace std;
 int main() {
     ConlluReader reader;
     vector<vector<Conllu>> sentences = reader.ReadConllu(
-            "/home/ryosuke-k/workspace/data/mst.train");
+            "/home/ryosuke-k/workspace/data/en-ud-dev.conllu");
 
     ShiftReduce parser(sentences, reader.getVocabSize(), reader.getPosSize());
     parser.Train();
     cout << "END" << endl;
 
     vector<vector<Conllu>> test_sentences = reader.ReadConllu(
-            "/home/ryosuke-k/workspace/data/mst.test");
+            "/home/ryosuke-k/workspace/data/en-ud-dev.conllu");
     int n = 0;
     clock_t start = clock();
     vector<int> v = parser.Test(test_sentences);
